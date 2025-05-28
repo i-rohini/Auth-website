@@ -80,7 +80,7 @@ app.get('/me', logger, auth, function(req, res) {
   let foundUser = null;
 
   for (let i = 0; i < users.length; i++) {
-    if (users[i].username === req.username) {
+    if (users[i].username === currentUser) {
       foundUser = users[i]
     }
   }
