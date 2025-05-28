@@ -1,7 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "harkirat123"
-
 const app = express();
 
 app.use(express.json());
@@ -12,6 +11,11 @@ function logger(req, res, next) {
   console.log(req.method + " request came ");
   next();
 }
+
+//localhost:3000, cors
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + "/public/index.html");
+})
 
 app.post('/signup', logger, function(req, res) {
   const username = req.body.username;
@@ -46,7 +50,7 @@ app.post('/signin', logger, function(req, res) {
     return
   } else {
     const token = jwt.sign({
-      username
+      username: foundUser.username
     }, JWT_SECRET);
 
     res.json({
